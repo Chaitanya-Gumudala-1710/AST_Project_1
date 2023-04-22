@@ -11,7 +11,7 @@ class State:
 
 # Creating a class named "Order" to represent an order placed by a customer 
 class Order:
-    def __init__(self, date, customer, order_details, state) -> None:
+    def __init__(self, date, customer, order_details, state):
         self.date = date
         self.customer = customer
         self.order_details = order_details
@@ -37,7 +37,20 @@ class Order:
     def calculate_total_weight(self):
         return None
     
+
+# Creating a class named "Order detail" to represent the details of an order
+class OrderDetail:
+    def __init__(self, quantity, item):
+        self.quantity = quantity
+        self.item = item
     
+    # Method to calulate subtotal of the order
+    def calculate_subtotal(self):
+        return None
+    
+    # Method to calculate the weight per item
+    def calculate_weight(self):
+        return self.quantity * self.item.weight
 
 # Create class of Customer, Address, Contract Details - Anudeep
 # Create class of Payment, Cash, Bank Transfers, Credit Card - Kamendu
