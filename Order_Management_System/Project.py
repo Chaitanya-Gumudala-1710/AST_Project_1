@@ -31,11 +31,13 @@ class Order:
     
     # Creating a method to calculate the total cost of the order
     def calculate_total(self):
-        return None
+        # Using a list comprehension to calculate subtotal of each order detail, then sum the subtotals
+        return sum([order_detail.calculate_weight() for order_detail in self.order_details])
     
     # Creating a method to calculate the total weight of the order
     def calculate_total_weight(self):
-        return None
+        # Using a list comprehension to calculate the weight of each order detail, then sum the weights
+        return sum([order_detail.calculate_weight() for order_detail in self.order_details])
     
 
 # Creating a class named "Order detail" to represent the details of an order
