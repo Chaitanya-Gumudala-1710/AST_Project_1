@@ -48,7 +48,7 @@ class OrderDetail:
     
     # Method to calulate subtotal of the order
     def calculate_subtotal(self):
-        return None
+        return self.quantity * self.item.get_price_for_quantity()
     
     # Method to calculate the weight per item
     def calculate_weight(self):
