@@ -52,6 +52,20 @@ class OrderDetail:
     def calculate_weight(self):
         return self.quantity * self.item.weight
 
+# Creating a class named "Item" to represent  an item that can be ordered
+class Item:
+    def __init__(self, price, weight, description):
+        self.price = price
+        self.weight = weight
+        self.description = description
+    
+    # Method to get price of the item for certain quantity
+    def get_price_for_quantity(self):
+        return self.price
+    
+    # Method to check an item is in stock 
+    def in_stock(self):
+        return True
 # Create class of Customer, Address, Contract Details - Anudeep
 # Create class of Payment, Cash, Bank Transfers, Credit Card - Kamendu
 # Test the code - Jay
