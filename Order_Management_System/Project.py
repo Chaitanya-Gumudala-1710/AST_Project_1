@@ -1,3 +1,6 @@
+from datetime import date
+
+
 # Create class of Order, Order Detail, Items, State - Chaitanya
 
 # Creating a class named "State" to represent different states of an order
@@ -157,8 +160,8 @@ class Cash(Payment):                                       # a child class for p
 
 
 class BankTransfere(Payment):                             # a child class for payment type as 'bank transfer'
-	def init(self, amount, recipient_name, IBAN, BIC):     
-		super().init(amount)
+	def __init__(self, amount, recipient_name, IBAN, BIC):     
+		super().__init__(amount)
 		self.recipient_name = recipient_name
 		self.IBAN = IBAN
 		self.BIC = BIC
@@ -168,15 +171,33 @@ class BankTransfere(Payment):                             # a child class for pa
    		return True
 
 class CreditCard(Payment):                               # a chilld class for payment type as 'Credit card'
-	def init(self, amount, number, type, cardholder_name, expiration_date):
-        super().init(amount)
+    def __init__(self, amount, number, type, cardholder_name, expiration_date):
+        super().__init__(amount)
         self.number = number
         self.type = type
         self.cardholder_name = cardholder_name
         self.expiration_date = expiration_date
 
-
-	def authorized(self):           #only authorization to keep the credit card details as hidden
+    def authorized(self):           #only authorization to keep the credit card details as hidden
     		return True
 
 # Test the code - Jay
+
+# Examples of usage
+        
+item1 = Item(price=10.99, weight=0.5, description="T-shirt")
+order_detail1 = OrderDetail(quantity=2, item=item1)
+order1 = Order(date=date.today(), customer=None, order_details=[order_detail1], state=State.PENDING)
+payment1 = CreditCard(amount=order1.calculate_total(), number="1234567890123456", type="Visa", cardholder_name="John Doe", expiration_date=date(2025, 12, 31))
+customer1 = Customer(contact_details=None, address=None, orders=[order1])
+address1 = Address(country="USA", city="New York", postalcode=10001, street="5th Avenue", number=123)
+contact_details1 = ContactDetails(first_name="John", last_name="Doe", email="johndoe@example.com", phone_number="123-456-7890")
+customer1.address = address1
+customer1.contact_details = contact_details1
+order1.customer = customer1
+order1.state = State.ACCEPTED
+
+print(customer1.get_contact_details().get_first_name()) # John
+print(customer1.get_address().get_full_address()) # 123 5th Avenue, 10001 New York, USA
+print(order1.calculate_total()) # 21.98
+print(order1.calculate_total_weight()) # 1.0
